@@ -1,6 +1,6 @@
 from django.contrib import messages
 from django.contrib.messages import constants
-from django.shortcuts import get_object_or_404, redirect, render
+from django.shortcuts import  redirect, render
 from django.contrib import auth
 from .utils import email_html
 from hashlib import sha256
