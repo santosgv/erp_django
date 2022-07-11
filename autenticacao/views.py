@@ -7,7 +7,7 @@ from django.contrib import auth
 import os
 from django.conf import settings
 from .utils import email_html
-from .models import Ativacao
+
 from hashlib import sha256
 
 
