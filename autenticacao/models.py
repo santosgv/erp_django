@@ -1,7 +1,6 @@
 from datetime import datetime
 from django.db import models
-from django.db.models.fields import CharField
-from django.contrib.auth.models import AbstractUser ,User
+from django.contrib.auth.models import AbstractUser
 
 
 class Empresa(models.Model):
@@ -44,18 +43,20 @@ class Empresa(models.Model):
     COMPLEMENTO =models.CharField(max_length=100)
     CIDADE = models.CharField(max_length=200)
     ESTADO =models.CharField(max_length=2 , choices=Estado_choices)
-    RESPONSAVEL = models.ForeignKey(User, on_delete = models.DO_NOTHING ,null=True)
+    RESPONSAVEL = models.CharField( max_length=500 ,blank=True)
     EMAIL_RESPONSAVEL = models.EmailField()
     EMAIL_FINANCEIRO = models.EmailField()
-    OBS =CharField(max_length=500 ,blank=True)
+    OBS =models.CharField(max_length=500 ,blank=True)
 
     def __str__(self) -> str:
         return self.NOME_EMPRESA
 
 
 class Usuario(AbstractUser):
-    EMPRESA = models.ForeignKey(Empresa, on_delete = models.DO_NOTHING ,null=True)
+    ID_EMPRESA = models.ForeignKey(Empresa, on_delete = models.DO_NOTHING , null=True)
     DATA_CADASTRO = datetime.now()
+
+
 
 
 
