@@ -2,9 +2,10 @@ from django.contrib import messages
 from django.contrib.messages import constants
 from django.http import HttpResponse
 from django.shortcuts import  redirect, render
-from .models import Empresa ,Usuario
+from .models import Empresa, UsuarioEmpresa 
 from django.contrib.auth.models import User
-from django.contrib import auth
+
+from django.contrib import auth 
 
 
 
@@ -46,10 +47,19 @@ def cadastro(request):
         
         empresa.save()
 
-        usuario_root = Usuario(username=NOME_EMPRESA ,password='senha123@' ,first_name=CPF_CNPJ,email=EMAIL_RESPONSAVEL,ID_EMPRESA= Empresa.objects.get(id=empresa.id))
-        usuario_root.save()
+        senha ='Senha123@'
 
- 
+        user = User.objects.create_user(username=NOME_EMPRESA,
+                                            email = EMAIL_RESPONSAVEL,
+                                            password=senha)
+        user.save()
+
+        usuario_empresa = UsuarioEmpresa(
+            USUARIO =User.objects.get(id=user.id),
+            EMPRESA = Empresa.objects.get(id=empresa.id)
+        )
+
+        usuario_empresa.save()
         
         return HttpResponse('Foii')
 

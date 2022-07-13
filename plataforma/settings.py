@@ -136,5 +136,3 @@ EMAIL_HOST_PASSWORD= config('EMAIL_HOST_PASSWORD')
 EMAIL_USE_TLS=True
 EMAIL_PORT =587
 EMAIL_HOST='smtp.gmail.com'
-
-AUTH_USER_MODEL ='autenticacao.Usuario'

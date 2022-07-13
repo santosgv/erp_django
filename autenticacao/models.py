@@ -1,6 +1,8 @@
 from datetime import datetime
+from tkinter import CASCADE
+from django.contrib.auth.models import User
 from django.db import models
-from django.contrib.auth.models import AbstractUser
+
 
 
 class Empresa(models.Model):
@@ -47,14 +49,17 @@ class Empresa(models.Model):
     EMAIL_RESPONSAVEL = models.EmailField()
     EMAIL_FINANCEIRO = models.EmailField()
     OBS =models.CharField(max_length=500 ,blank=True)
-
     def __str__(self) -> str:
         return self.NOME_EMPRESA
 
+class UsuarioEmpresa(models.Model):
+    USUARIO = models.ForeignKey(User , on_delete=models.CASCADE, null=True)
+    EMPRESA = models.ForeignKey(Empresa, on_delete=models.CASCADE, null=True)
 
-class Usuario(AbstractUser):
-    ID_EMPRESA = models.ForeignKey(Empresa, on_delete = models.DO_NOTHING , null=True)
-    DATA_CADASTRO = datetime.now()
+    def __str__(self) -> str:
+        return self.USUARIO
+
+
 
 
 
