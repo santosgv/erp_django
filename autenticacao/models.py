@@ -48,7 +48,7 @@ class Empresa(models.Model):
     RESPONSAVEL = models.CharField( max_length=500 ,blank=True)
     EMAIL_RESPONSAVEL = models.EmailField()
     EMAIL_FINANCEIRO = models.EmailField()
-    OBS =models.CharField(max_length=500 ,blank=True)
+    OBS =models.TextField(max_length=500 ,blank=True)
     def __str__(self) -> str:
         return self.NOME_EMPRESA
 
