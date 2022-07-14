@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block 'head' %}
+<link rel="stylesheet" href="{% static 'autenticacao/css/autenticacao.css' %}">
+<link rel="stylesheet" href="{% static 'home/css/home.css' %}" >
+{% endblock %}
+
+{% block 'body' %}
+
+{% if messages %}
+<br>
+{% for message in messages %}
+<div class="alert {{message.tags}}">
+{{message}}
+</div>
+{% endfor %}
+{% endif %}
+
+   <h1> Home</h1>
+{% endblock %}

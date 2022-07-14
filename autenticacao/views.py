@@ -4,7 +4,6 @@ from django.http import HttpResponse
 from django.shortcuts import  redirect, render
 from .models import Empresa, UsuarioEmpresa 
 from django.contrib.auth.models import User
-
 from django.contrib import auth 
 
 
@@ -28,9 +27,12 @@ def cadastro(request):
         EMAIL_FINANCEIRO = request.POST.get("EMAIL_FINANCEIRO")
         OBS = request.POST.get("OBS")
 
-    
+        if len(NOME_EMPRESA.strip()) == 0 or len(CPF_CNPJ.strip()) == 0 or len(EMAIL_RESPONSAVEL.strip()) ==0:
+            messages.add_message(request, constants.ERROR, 'Preencha todos os campos')
+            return redirect('/auth/cadastro')
+    try:
 
-        empresa = Empresa(
+            empresa = Empresa(
             NOME_EMPRESA = NOME_EMPRESA,
             CPF_CNPJ = CPF_CNPJ,
             CEP = CEP,
@@ -45,23 +47,26 @@ def cadastro(request):
             EMAIL_FINANCEIRO = EMAIL_FINANCEIRO,
             OBS = OBS)
         
-        empresa.save()
+            empresa.save()
 
-        senha ='Senha123@'
+            senha ='Senha123@'
 
-        user = User.objects.create_user(username=NOME_EMPRESA,
+            user = User.objects.create_user(username=NOME_EMPRESA,
                                             email = EMAIL_RESPONSAVEL,
                                             password=senha)
-        user.save()
+            user.save()
 
-        usuario_empresa = UsuarioEmpresa(
+            usuario_empresa = UsuarioEmpresa(
             USUARIO =User.objects.get(id=user.id),
             EMPRESA = Empresa.objects.get(id=empresa.id)
         )
 
-        usuario_empresa.save()
+            usuario_empresa.save()
         
-        return HttpResponse('Foii')
+            return HttpResponse('Foii')
+    except:
+            pass
+
 
 def logar(request):
     if request.method == "GET":
@@ -84,4 +89,5 @@ def logar(request):
 
 
 def sair(request):
+    auth.logout(request)
     return redirect('/auth/logar')
