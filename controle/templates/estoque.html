@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block 'head' %}
+<link rel="stylesheet" href="{% static 'autenticacao/css/autenticacao.css' %}">
+<link rel="stylesheet" href="{% static 'home/css/home.css' %}" >
+{% endblock %}
+
+{% block 'body' %}
+
+<div class="container-fluid">
+    <h1 class="text-center" >Estoque</h1>
+    <div class="container">
+        <table class="table table-striped">
+            <tr class="thead-dark">
+                <th scope="col"> </th>
+                <th scope="col">Produto</th>
+                <th scope="col">Quantidade</th>
+              </tr>
+              {% for estoque in estoques %}
+              <tbody>
+                <tr>
+                  <th hidden id="id" name="id">{{estoque.id}}</th>
+                  <th scope="row">{{estoque.id}}</th>
+                  <td>{{estoque.produto}}</td>
+                  <td>{{estoque.quantidade}}</td>
+                </tr>
+              </tbody>
+              {% endfor%}
+        </table>
+    </div>
+
+      
+  
+{% endblock %}
