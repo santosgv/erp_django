@@ -8,18 +8,18 @@
 
 {% block 'body' %}
 <div class="container-fluid">
-    <h1 class="text-center" >Estoque</h1>
+    <h1 class="text-center" >Produtos</h1>
     <div class="container">
         <div>
-            <a href="#">Inserir Produto</a>
+            <a href="{% url 'inserirProduto' %}">Inserir Produto</a>
           </div>
           <br>
               <table class="table table-striped">
                   <tr class="thead-dark">
                       <th scope="col"> </th>
-                      <th scope="col">Nome</th>
-                      <th scope="col">preco</th>
-                      <th scope="col">categoria</th>
+                      <th scope="col">NOME</th>
+                      <th scope="col">PREÇO</th>
+                      <th scope="col">CATEGORIA</th>
                     </tr>
                     {% for Produto in Produtos %}
                     <tbody>
