@@ -7,8 +7,10 @@ def categorias(request):
     return render(request,'categoria.html')
 
 def produtos(request):
+    if request.method == "GET":
+        Produtos = Produto.objects.all()
 
-    return render(request,'produtos.html')
+    return render(request,'produtos.html',{'Produtos':Produtos})
 
 def estoque(request):
     if request.method == "GET":
@@ -33,9 +35,6 @@ def inserirEstoque(request):
 
 def vendas(request):
     return render(request,'vendas.html')
-
-def fornecedores(request):
-    return render(request,'fornecedores.html')
 
 def pessoas(request):
     return render(request,'pessoas.html')

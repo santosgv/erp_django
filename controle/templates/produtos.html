@@ -1,1 +1,50 @@
-<h1>produtos</h1>
+{% extends 'base.html' %}
+{% load static %}
+
+{% block 'head' %}
+<link rel="stylesheet" href="{% static 'autenticacao/css/autenticacao.css' %}">
+<link rel="stylesheet" href="{% static 'home/css/home.css' %}" >
+{% endblock %}
+
+{% block 'body' %}
+<div class="container-fluid">
+    <h1 class="text-center" >Estoque</h1>
+    <div class="container">
+        <div>
+            <a href="#">Inserir Produto</a>
+          </div>
+          <br>
+              <table class="table table-striped">
+                  <tr class="thead-dark">
+                      <th scope="col"> </th>
+                      <th scope="col">Nome</th>
+                      <th scope="col">preco</th>
+                      <th scope="col">categoria</th>
+                    </tr>
+                    {% for Produto in Produtos %}
+                    <tbody>
+                      <tr>
+                        <th hidden id="id" name="id">{{Produto.id}}</th>
+                        <th scope="row">{{estoque.id}}</th>
+                        <td>{{Produto.nome}}</td>
+                        <td>{{Produto.preco}}</td>
+                        <td>
+                            {% if Produto.categoria == null %}
+                                            <span class="badge badge-danger">Sem Categoria</span>
+                                               
+                                        
+                            {% else %}
+                            <span class="badge badge-info">{{Produto.categoria}}</span>
+                                               
+                                        {% endif %}
+                          </td>
+                      </tr>
+                     
+                    </tbody>
+                    {% endfor%}
+              </table>
+
+    </div>
+</div>
+
+{% endblock %}
